@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
+/*   By: lengarci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 22:08:00 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/13 08:51:20 by lengarci         ###   ########.fr       */
+/*   Created: 2025/05/13 08:42:29 by lengarci          #+#    #+#             */
+/*   Updated: 2025/05/13 08:50:43 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	file_error(void)
+void	get_path(t_pipe *pipex, char *path)
 {
-	ft_printf("Error\nA file can't be open\n");
-	exit(1);
-}
-
-void	path_error(void)
-{
-	ft_printf("Error\nPath error\n");
-	exit(1);
-}
-
-void	malloc_error(void)
-{
-	ft_printf("Error\nMalloc error\n");
-	exit(1);
+	(void)pipex;
+	path = path + 5;
+	if (!path)
+		path_error();
+	pipex->paths = ft_split(path, ':');
+	if (!pipex->paths)
+		malloc_error();
 }
