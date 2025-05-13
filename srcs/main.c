@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:57:36 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/13 12:42:18 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:04:20 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv, char **envp)
 	open_files(&pipex, argv);
 	get_path(&pipex, envp[27]);
 	take_commands(&pipex, argc, argv);
+	pipex_func(&pipex, envp);
 	exit_program(&pipex);
 	return (0);
 }

@@ -6,13 +6,14 @@
 #    By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/07 14:49:00 by lenygarcia        #+#    #+#              #
-#    Updated: 2025/05/13 09:55:39 by lengarci         ###   ########.fr        #
+#    Updated: 2025/05/13 13:01:07 by lengarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= cc
 CFLAGS		= -Wall -Wextra -Werror -g -Ilibft/includes -Iincludes
-SRCS		= srcs/main.c srcs/test_error.c srcs/error.c srcs/open_file.c srcs/path.c srcs/commands.c srcs/free_func.c
+SRCS		= srcs/main.c srcs/test_error.c srcs/error.c srcs/open_file.c srcs/path.c srcs/commands.c srcs/free_func.c \
+		srcs/pipex.c
 OBJS		= $(SRCS:.c=.o)
 NAME		= pipex
 LIBFT_PATH	= ./libft
