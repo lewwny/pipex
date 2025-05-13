@@ -6,7 +6,7 @@
 /*   By: lengarci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:48:07 by lengarci          #+#    #+#             */
-/*   Updated: 2025/05/13 14:15:20 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:01:06 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 static void	exec_cmd(t_pipe *pipex, char **envp, int i)
 {
-	execve(pipex->path_cmd[i], pipex->cmd[i], envp);
-	ft_printf("Error\nA cmd didn't exec\n");
-	free_cmd(pipex->cmd);
-	free_split(pipex->path_cmd);
-	free_split(pipex->paths);
+	if (pipex->path_cmd[i])
+		execve(pipex->path_cmd[i], pipex->cmd[i], envp);
+	write(2, "pipex error\n", 12);
+	free_cmd(pipex->cmd, pipex);
+	free_split(pipex->path_cmd, pipex);
+	free_split(pipex->paths, pipex);
 	exit(1);
 }
 

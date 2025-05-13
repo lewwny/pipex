@@ -29,11 +29,11 @@ void	malloc_error(t_pipe *pipex)
 	if (pipex)
 	{
 		if (pipex->cmd)
-			free_cmd(pipex->cmd);
+			free_cmd(pipex->cmd, pipex);
 		if (pipex->paths)
-			free_split(pipex->paths);
+			free_split(pipex->paths, pipex);
 		if (pipex->path_cmd)
-			free_split(pipex->path_cmd);
+			free_split(pipex->path_cmd, pipex);
 	}
 	ft_printf("Error\nMalloc error\n");
 	exit(1);
@@ -42,11 +42,11 @@ void	malloc_error(t_pipe *pipex)
 void	access_error(t_pipe *pipex)
 {
 	if (pipex->cmd)
-		free_cmd(pipex->cmd);
+		free_cmd(pipex->cmd, pipex);
 	if (pipex->paths)
-		free_split(pipex->paths);
+		free_split(pipex->paths, pipex);
 	if (pipex->path_cmd)
-		free_split(pipex->path_cmd);
+		free_split(pipex->path_cmd, pipex);
 	ft_printf("Error\nCommand does not found\n");
 	exit(1);
 }
@@ -54,11 +54,11 @@ void	access_error(t_pipe *pipex)
 void	error_pipe(t_pipe *pipex)
 {
 	if (pipex->cmd)
-		free_cmd(pipex->cmd);
+		free_cmd(pipex->cmd, pipex);
 	if (pipex->paths)
-		free_split(pipex->paths);
+		free_split(pipex->paths, pipex);
 	if (pipex->path_cmd)
-		free_split(pipex->path_cmd);
+		free_split(pipex->path_cmd, pipex);
 	ft_printf("Error\nPipe error\n");
 	exit(1);
 }

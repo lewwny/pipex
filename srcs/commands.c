@@ -6,7 +6,7 @@
 /*   By: lengarci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 09:31:30 by lengarci          #+#    #+#             */
-/*   Updated: 2025/05/13 14:11:50 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:42:33 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static char	*test_path(char *cmd, char **paths, t_pipe *pipex)
 	int		i;
 	char	*tmp;
 
+	tmp = NULL;
 	i = 0;
 	while (paths[i])
 	{
@@ -66,8 +67,6 @@ static void	take_path_command(t_pipe *pipex)
 	while (i < pipex->cmd_count)
 	{
 		tmp = test_path(pipex->cmd[i][0], pipex->paths, pipex);
-		if (!tmp)
-			access_error(pipex);
 		pipex->path_cmd[i] = tmp;
 		i++;
 	}

@@ -20,8 +20,8 @@ static void	exit_program(t_pipe *pipex)
 	while (pipex->paths[i])
 		free(pipex->paths[i++]);
 	free(pipex->paths);
-	free_cmd(pipex->cmd);
-	free_split(pipex->path_cmd);
+	free_cmd(pipex->cmd, pipex);
+	free_split(pipex->path_cmd, pipex);
 }
 
 int	main(int argc, char **argv, char **envp)
