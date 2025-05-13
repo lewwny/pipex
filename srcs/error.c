@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:08:00 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/13 08:51:20 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:10:43 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,26 @@ void	path_error(void)
 	exit(1);
 }
 
-void	malloc_error(void)
+void	malloc_error(t_pipe *pipex)
 {
+	if (pipex->cmd)
+		free_cmd(pipex->cmd);
+	if (pipex->paths)
+		free_split(pipex->paths);
+	if (pipex->path_cmd)
+		free_split(pipex->path_cmd);
 	ft_printf("Error\nMalloc error\n");
+	exit(1);
+}
+
+void	access_error(t_pipe *pipex)
+{
+	if (pipex->cmd)
+		free_cmd(pipex->cmd);
+	if (pipex->paths)
+		free_split(pipex->paths);
+	if (pipex->path_cmd)
+		free_split(pipex->path_cmd);
+	ft_printf("Error\nCommand does not found\n");
 	exit(1);
 }

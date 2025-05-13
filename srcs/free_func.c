@@ -1,36 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
+/*   free_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lengarci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 08:42:29 by lengarci          #+#    #+#             */
-/*   Updated: 2025/05/13 11:28:16 by lengarci         ###   ########.fr       */
+/*   Created: 2025/05/13 09:53:47 by lengarci          #+#    #+#             */
+/*   Updated: 2025/05/13 11:29:40 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	get_path(t_pipe *pipex, char *path)
+void	free_cmd(char ***cmd)
 {
-	int		i;
-	char	*tmp;
+	int	i;
+	int	j;
 
-	path = path + 5;
-	if (!path)
-		path_error();
-	pipex->paths = ft_split(path, ':');
-	if (!pipex->paths)
-		malloc_error(NULL);
 	i = 0;
-	while (pipex->paths[i])
+	while (cmd[i])
 	{
-		tmp = ft_strjoin(pipex->paths[i], "/");
-		if (!tmp)
-			malloc_error(pipex);
-		free(pipex->paths[i]);
-		pipex->paths[i] = tmp;
+		j = 0;
+		while (cmd[i][j])
+		{
+			free(cmd[i][j]);
+			j++;
+		}
+		free(cmd[i]);
 		i++;
 	}
+	free(cmd);
+}
+
+void	free_split(char **tab)
+{
+	int	i;
+
+	if (!tab)
+		return ;
+	i = 0;
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
 }

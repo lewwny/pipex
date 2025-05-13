@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 14:21:56 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/03/11 09:50:43 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/13 11:23:33 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*copystring(char const *s, int start, int end)
 	int		i;
 
 	i = 0;
-	res = (char *) malloc(sizeof(char) * (end - start + 1));
+	res = (char *) malloc(sizeof(char) * (end - start + 2));
 	if (!res)
 		return (NULL);
 	while (start < end)
