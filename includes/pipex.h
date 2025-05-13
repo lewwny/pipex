@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:17:27 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/13 13:04:33 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:59:51 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_pipe
 	char	***cmd;
 }	t_pipe;
 
-void	test_arg(int argc);
+void	test_arg(int argc, char **argv);
 void	file_error(void);
 void	open_files(t_pipe *pipex, char **argv);
 void	get_path(t_pipe *pipex, char *path);

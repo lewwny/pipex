@@ -6,7 +6,7 @@
 /*   By: lengarci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:48:07 by lengarci          #+#    #+#             */
-/*   Updated: 2025/05/13 13:04:10 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:15:20 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	exec_cmd(t_pipe *pipex, char **envp, int i)
 
 void	pipex_func(t_pipe *pipex, char **envp)
 {
-	int	fd[2];
+	int		fd[2];
 	pid_t	pid1;
 	pid_t	pid2;
 

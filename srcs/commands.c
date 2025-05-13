@@ -6,7 +6,7 @@
 /*   By: lengarci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 09:31:30 by lengarci          #+#    #+#             */
-/*   Updated: 2025/05/13 11:32:54 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:11:50 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static void	malloc_and_create_cmd(t_pipe *pipex, int argc, char **argv)
 	{
 		pipex->cmd[i] = ft_split(argv[i + 2], ' ');
 		if (!pipex->cmd[i])
+		{
+			pipex->cmd[i] = NULL;
 			malloc_error(pipex);
+		}
 		i++;
 	}
 	pipex->cmd[i] = NULL;
