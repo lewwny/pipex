@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:57:36 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/13 14:23:14 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:06:45 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	exit_program(t_pipe *pipex)
 		free(pipex->paths[i++]);
 	free(pipex->paths);
 	free_cmd(pipex->cmd, pipex);
-	free_split(pipex->path_cmd, pipex);
+	free_split_n(pipex->path_cmd, pipex->cmd_count);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -29,6 +29,7 @@ int	main(int argc, char **argv, char **envp)
 	t_pipe	pipex;
 	int		i;
 
+	ft_bzero(&pipex, sizeof(pipex));
 	test_arg(argc, argv);
 	open_files(&pipex, argv);
 	i = 0;

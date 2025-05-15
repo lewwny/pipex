@@ -6,21 +6,44 @@
 /*   By: lengarci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:48:07 by lengarci          #+#    #+#             */
-/*   Updated: 2025/05/13 15:01:06 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:19:04 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-static void	exec_cmd(t_pipe *pipex, char **envp, int i)
+void	ft_puterror(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	write(2, str, i);
+}
+
+static void	exec_cmd(t_pipe *pipex, char **envp, int i, int *fd)
 {
 	if (pipex->path_cmd[i])
 		execve(pipex->path_cmd[i], pipex->cmd[i], envp);
-	write(2, "pipex error\n", 12);
+	ft_puterror("Error\nCommand <");
+	ft_puterror(pipex->cmd[i][0]);
+	ft_puterror("> does not found\n");
 	free_cmd(pipex->cmd, pipex);
-	free_split(pipex->path_cmd, pipex);
+	free_split_n(pipex->path_cmd, pipex->cmd_count);
 	free_split(pipex->paths, pipex);
-	exit(1);
+	close(fd[0]);
+	close(fd[1]);
+	exit(127);
+}
+
+static void	son_program(t_pipe *pipex, int *fd, int n, char **envp)
+{
+	dup2(pipex->fd_infile, STDIN_FILENO);
+	dup2(fd[1], STDOUT_FILENO);
+	close(fd[0]);
+	close(fd[1]);
+	exec_cmd(pipex, envp, n, fd);
 }
 
 void	pipex_func(t_pipe *pipex, char **envp)
@@ -33,13 +56,7 @@ void	pipex_func(t_pipe *pipex, char **envp)
 		error_pipe(pipex);
 	pid1 = fork();
 	if (pid1 == 0)
-	{
-		dup2(pipex->fd_infile, STDIN_FILENO);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		exec_cmd(pipex, envp, 0);
-	}
+		son_program(pipex, fd, 0, envp);
 	pid2 = fork();
 	if (pid2 == 0)
 	{
@@ -47,7 +64,7 @@ void	pipex_func(t_pipe *pipex, char **envp)
 		dup2(pipex->fd_outfile, STDOUT_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		exec_cmd(pipex, envp, 1);
+		exec_cmd(pipex, envp, 1, fd);
 	}
 	close(fd[0]);
 	close(fd[1]);

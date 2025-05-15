@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:17:27 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/13 15:45:07 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/15 13:51:40 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ void	path_error(void);
 void	malloc_error(t_pipe *pipex);
 void	take_commands(t_pipe *pipex, int argc, char **argv);
 void	free_cmd(char ***cmd, t_pipe *pipex);
-void	access_error(t_pipe *pipex);
 void	free_split(char **tab, t_pipe *pipex);
 void	error_pipe(t_pipe *pipex);
 void	pipex_func(t_pipe *pipex, char **envp);
+void	ft_puterror(char *str);
+void	free_split_n(char **tab, int n);
 
 #endif
