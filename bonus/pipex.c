@@ -6,7 +6,7 @@
 /*   By: lengarci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:48:07 by lengarci          #+#    #+#             */
-/*   Updated: 2025/05/19 10:50:50 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:22:22 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,14 @@ static void	son_program(t_pipe *pipex, char **envp, int input_fd, int output_fd)
 	exec_cmd(pipex, envp, pipex->i);
 }
 
-static void	last_pipe(t_pipe *pipex, int pipe_in, char **envp)
+static void	last_pipe(t_pipe *pipex, int pipe_in, char **envp, pid_t *pid)
+{
+	*pid = fork();
+	if (*pid == 0)
+		son_program(pipex, envp, pipe_in, pipex->fd_outfile);
+	close(pipe_in);
+	close(pipex->fd_outfile);
+}
 
 void	pipex_func(t_pipe *pipex, char **envp, char **argv, int argc)
 {
@@ -67,11 +74,7 @@ void	pipex_func(t_pipe *pipex, char **envp, char **argv, int argc)
 	}
 	pipex->fd_outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC,
 			0644);
-	pid = fork();
-	if (pid == 0)
-		son_program(pipex, envp, pipe_in, pipex->fd_outfile);
-	close(pipe_in);
-	close(pipex->fd_outfile);
+	last_pipe(pipex, pipe_in, envp, &pid);
 	while (wait(NULL) < 0)
 	{
 	}
