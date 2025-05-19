@@ -6,9 +6,11 @@
 #    By: lengarci <lengarci@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/06 20:35:06 by lengarci          #+#    #+#              #
-#    Updated: 2025/05/13 11:31:45 by lengarci         ###   ########.fr        #
+#    Updated: 2025/05/19 08:32:56 by lengarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+.SILENT:
 
 CC	= cc -g
 CFLAGS	= -Wall -Wextra -Werror
@@ -25,18 +27,25 @@ HEADERS	= libft.h
 OBJS	= ${SRCS:.c=.o}
 NAME	= libft.a
 
+YELLOW  = \033[1;33m
+RESET   = \033[0m
+BLUE    = \033[0;34m
+
 all: ${NAME}
 
 $(NAME): $(OBJS)
 	@ar rcs $(NAME) $^
+	@printf "$(YELLOW)✔ Build libft complete!$(RESET)\n"
 
 %.o: %.c ${HEADERS}
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
+	@printf "$(BLUE)==> Cleaning libft objects$(RESET)\n"
 	rm -f ${OBJS}
 
 fclean: clean
+	@printf "$(BLUE)==> Cleaning libft all$(RESET)\n"
 	rm -f ${NAME}
 
 re:	fclean all

@@ -6,7 +6,7 @@
 /*   By: lengarci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:48:07 by lengarci          #+#    #+#             */
-/*   Updated: 2025/05/15 14:19:04 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/19 08:19:39 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	son_program(t_pipe *pipex, int *fd, int n, char **envp)
 	exec_cmd(pipex, envp, n, fd);
 }
 
-void	pipex_func(t_pipe *pipex, char **envp)
+void	pipex_func(t_pipe *pipex, char **envp, char **argv)
 {
 	int		fd[2];
 	pid_t	pid1;
@@ -61,6 +61,9 @@ void	pipex_func(t_pipe *pipex, char **envp)
 	if (pid2 == 0)
 	{
 		dup2(fd[0], STDIN_FILENO);
+		pipex->fd_outfile = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (pipex->fd_outfile == -1)
+			file_error2(pipex);
 		dup2(pipex->fd_outfile, STDOUT_FILENO);
 		close(fd[0]);
 		close(fd[1]);
@@ -69,5 +72,5 @@ void	pipex_func(t_pipe *pipex, char **envp)
 	close(fd[0]);
 	close(fd[1]);
 	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
+	waitpid(pid2, &pipex->status, 0);
 }

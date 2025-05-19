@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:09:32 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/07 22:16:09 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/19 08:16:51 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	open_files(t_pipe *pipex, char **argv)
 {
 	pipex->fd_infile = open(argv[1], O_RDONLY);
 	if (pipex->fd_infile == -1)
-		file_error();
-	pipex->fd_outfile = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (pipex->fd_outfile == -1)
-		file_error();
+	{
+		ft_puterror("Error\nA file can't be open\n");
+		pipex->fd_infile = open("/dev/null", O_RDONLY);
+	}
 }

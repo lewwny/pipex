@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:08:00 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/15 14:00:22 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/19 08:20:14 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,20 @@ void	error_pipe(t_pipe *pipex)
 	if (pipex->path_cmd)
 		free_split_n(pipex->path_cmd, pipex->cmd_count);
 	ft_puterror("Error\nPipe error\n");
+	exit(1);
+}
+
+void	file_error2(t_pipe *pipex)
+{
+	if (pipex)
+	{
+		if (pipex->cmd)
+			free_cmd(pipex->cmd, pipex);
+		if (pipex->paths)
+			free_split(pipex->paths, pipex);
+		if (pipex->path_cmd)
+			free_split_n(pipex->path_cmd, pipex->cmd_count);
+	}
+	ft_puterror("Error\nA file can't be open\n");
 	exit(1);
 }
