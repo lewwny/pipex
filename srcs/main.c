@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:57:36 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/19 08:18:10 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/19 13:42:48 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	exit_program(t_pipe *pipex)
 	while (pipex->paths[i])
 		free(pipex->paths[i++]);
 	free(pipex->paths);
+	close(pipex->fd_infile);
 	free_cmd(pipex->cmd, pipex);
 	free_split_n(pipex->path_cmd, pipex->cmd_count);
 }

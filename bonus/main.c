@@ -6,11 +6,21 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:57:36 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/19 10:15:57 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/22 08:46:23 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	ft_puterror(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	write(2, str, i);
+}
 
 static void	exit_program(t_pipe *pipex)
 {
@@ -20,6 +30,7 @@ static void	exit_program(t_pipe *pipex)
 	while (pipex->paths[i])
 		free(pipex->paths[i++]);
 	free(pipex->paths);
+	close(pipex->fd_infile);
 	free_cmd(pipex->cmd, pipex);
 	free_split_n(pipex->path_cmd, pipex->cmd_count);
 }

@@ -6,7 +6,7 @@
 /*   By: lengarci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:48:07 by lengarci          #+#    #+#             */
-/*   Updated: 2025/05/19 08:19:39 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/22 07:59:55 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	ft_puterror(char *str)
 
 static void	exec_cmd(t_pipe *pipex, char **envp, int i, int *fd)
 {
+	if (i)
+		close(pipex->fd_outfile);
 	if (pipex->path_cmd[i])
 		execve(pipex->path_cmd[i], pipex->cmd[i], envp);
 	ft_puterror("Error\nCommand <");
@@ -34,6 +36,7 @@ static void	exec_cmd(t_pipe *pipex, char **envp, int i, int *fd)
 	free_split(pipex->paths, pipex);
 	close(fd[0]);
 	close(fd[1]);
+	close(pipex->fd_infile);
 	exit(127);
 }
 
@@ -44,6 +47,13 @@ static void	son_program(t_pipe *pipex, int *fd, int n, char **envp)
 	close(fd[0]);
 	close(fd[1]);
 	exec_cmd(pipex, envp, n, fd);
+}
+
+static void	file_error22(t_pipe *pipex, int *fd)
+{
+	close(fd[0]);
+	close(fd[1]);
+	file_error2(pipex);
 }
 
 void	pipex_func(t_pipe *pipex, char **envp, char **argv)
@@ -63,7 +73,7 @@ void	pipex_func(t_pipe *pipex, char **envp, char **argv)
 		dup2(fd[0], STDIN_FILENO);
 		pipex->fd_outfile = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (pipex->fd_outfile == -1)
-			file_error2(pipex);
+			file_error22(pipex, fd);
 		dup2(pipex->fd_outfile, STDOUT_FILENO);
 		close(fd[0]);
 		close(fd[1]);

@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:08:00 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/19 08:20:14 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/22 08:19:48 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	file_error2(t_pipe *pipex)
 		if (pipex->path_cmd)
 			free_split_n(pipex->path_cmd, pipex->cmd_count);
 	}
+	close(pipex->fd_infile);
 	ft_puterror("Error\nA file can't be open\n");
 	exit(1);
 }
