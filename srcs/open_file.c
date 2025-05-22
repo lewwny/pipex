@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:09:32 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/19 08:16:51 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:23:11 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ void	open_files(t_pipe *pipex, char **argv)
 	{
 		ft_puterror("Error\nA file can't be open\n");
 		pipex->fd_infile = open("/dev/null", O_RDONLY);
+		pipex->test = 1;
 	}
 }

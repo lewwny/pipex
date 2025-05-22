@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:17:27 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/22 08:19:57 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:22:53 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_pipe
 	int		fd_outfile;
 	int		cmd_count;
 	int		status;
+	int		test;
 	char	**paths;
 	char	**path_cmd;
 	char	***cmd;

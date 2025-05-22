@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 21:57:36 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/22 08:46:23 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:34:49 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	t_pipe	pipex;
 	int		i;
 
+	pipex.test = 0;
 	ft_bzero(&pipex, sizeof(pipex));
 	test_arg(argc, argv);
 	open_files(&pipex, argv);

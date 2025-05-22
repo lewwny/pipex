@@ -6,7 +6,7 @@
 /*   By: lengarci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:48:07 by lengarci          #+#    #+#             */
-/*   Updated: 2025/05/22 08:57:26 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:35:38 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	son_program(t_pipe *pipex, char **envp, int input_fd, int output_fd)
 	dup2(output_fd, 1);
 	close(input_fd);
 	close(output_fd);
+	close(pipex->fd_infile);
 	exec_cmd(pipex, envp, pipex->i);
 }
 
@@ -61,7 +62,7 @@ void	pipex_func(t_pipe *pipex, char **envp, char **argv, int argc)
 	int		pipe_in;
 	pid_t	pid;
 
-	pipex->i = 0;
+	pipex->i = pipex->test + 0;
 	pipe_in = pipex->fd_infile;
 	while (pipex->i < pipex->cmd_count - 1)
 	{

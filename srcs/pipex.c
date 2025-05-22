@@ -6,7 +6,7 @@
 /*   By: lengarci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:48:07 by lengarci          #+#    #+#             */
-/*   Updated: 2025/05/22 07:59:55 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:40:23 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_puterror(char *str)
 
 static void	exec_cmd(t_pipe *pipex, char **envp, int i, int *fd)
 {
+	close(pipex->fd_infile);
 	if (i)
 		close(pipex->fd_outfile);
 	if (pipex->path_cmd[i])
@@ -65,7 +66,7 @@ void	pipex_func(t_pipe *pipex, char **envp, char **argv)
 	if (pipe(fd) == -1)
 		error_pipe(pipex);
 	pid1 = fork();
-	if (pid1 == 0)
+	if (pid1 == 0 && !pipex->test)
 		son_program(pipex, fd, 0, envp);
 	pid2 = fork();
 	if (pid2 == 0)
